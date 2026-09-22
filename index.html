@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexTrack - The Ultimate Edge-Powered Ad Tracker SaaS</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #00f2fe; /* Electric Blue */
+            --secondary: #4facfe; /* Light Blue */
+            --dark-bg: #0a0e17;
+            --card-bg: #161b29;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --accent: #00ff88; /* Success Green */
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(10, 14, 23, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 180px 0 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a253a 0%, var(--dark-bg) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.3);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(rgba(10, 14, 23, 0.8), rgba(10, 14, 23, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simple hide for mobile for this example */
+            .hero-btns { flex-direction: column; gap: 10px; padding: 0 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <!-- Replace with your logo.png -->
+                    <img src="/logo.png" alt="NexTrack Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Docs</a></li>
+                    <li><a href="#" class="btn btn-outline">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <p class="gradient-text" style="font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.9rem;">Best-in-Class Ad Tracking</p>
+            <h1>The Infrastructure Behind<br> High-ROI Campaigns</h1>
+            <p>Track traffic, analyze conversions, and optimize ad spend across all sources in real-time. NexTrack handles the heavy lifting so you can focus on scaling.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+                <a href="#features" class="btn btn-outline">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title"><span>Why NexTrack?</span></h2>
+            
+            <div class="features-grid">
+                <!-- Feature 1: Speed -->
+                <div class="feature-card">
+                    <span class="icon">⚡</span>
+                    <h3>Blazing Fast <span class="gradient-text">Edge</span> Tech</h3>
+                    <p>Powered by global Edge computing. Experience near-zero latency redirects and real-time report updates, no matter where your traffic comes from.</p>
+                </div>
+
+                <!-- Feature 2: Price -->
+                <div class="feature-card">
+                    <span class="icon">💰</span>
+                    <h3>Drastically <span class="gradient-text">Cut</span> Costs</h3>
+                    <p>Stop overpaying for legacy trackers. Our modern architecture slashes infrastructure overhead, allowing us to offer professional features at a budget-friendly price.</p>
+                </div>
+
+                <!-- Feature 3: Accuracy -->
+                <div class="feature-card">
+                    <span class="icon">🎯</span>
+                    <h3>Pinpoint <span class="gradient-text">Accuracy</span></h3>
+                    <p>Eliminate data discrepancies. Track clicks, conversions, and custom events with absolute precision using our proprietary, anti-fraud detection engine.</p>
+                </div>
+
+                <!-- Feature 4: Customizable -->
+                <div class="feature-card">
+                    <span class="icon">🛠️</span>
+                    <h3>Fully <span class="gradient-text">Customizable</span></h3>
+                    <p>Your business, your rules. Tailor dashboards, build custom multi-step funnels, and integrate via API to fit NexTrack seamlessly into your workflow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Out-Track the Competition?</h2>
+            <p>Join thousands of media buyers and agencies who have switched to NexTrack for better performance and lower bills.</p>
+            <a href="#" class="btn btn-primary btn-lg">Create Your Account</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 NexTrack Technologies. All rights reserved.</p>
+                <div class="footer-links logo">
+                    <img src="/logo.png" alt="NexTrack" style="height: 25px; opacity: 0.5;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
